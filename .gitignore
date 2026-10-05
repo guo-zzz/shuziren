@@ -12,7 +12,9 @@ __pycache__/
 *.pyc
 
 # ===== 机密：官方抽样语料，禁止入库、禁止外传 =====
-demo/tests/corpus/
+# 只放行说明文件，语料本体永不入库
+demo/tests/corpus/*
+!demo/tests/corpus/README.md
 
 # ===== 可重新生成的打包产物 =====
 deliverables/*.zip
