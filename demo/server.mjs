@@ -396,8 +396,11 @@ const server = http.createServer(async (req, res) => {
 });
 
 const START = loadConfig();
-const PORT = Number(process.env.DEMO_PORT || START.port || 8090);
-const HOST = process.env.DEMO_HOST || "127.0.0.1";
+// 端口/监听地址三级回退：云平台（Render/Railway/Fly 等）会注入 PORT 并要求监听 0.0.0.0；
+// 本地可用 DEMO_PORT / DEMO_HOST 覆盖（守护脚本靠它开放局域网访问）；
+// 两者都没给时用 config.json 的 port，且只监听 127.0.0.1（最安全的默认）。
+const PORT = Number(process.env.DEMO_PORT || process.env.PORT || START.port || 8090);
+const HOST = process.env.DEMO_HOST || (process.env.PORT ? "0.0.0.0" : "127.0.0.1");
 
 // 控制台输出一律用 ASCII：Windows 中文控制台（代码页 936）下 Node 写出的中文会变成乱码，
 // 中文说明交给 启动Demo.bat 的横幅和 README，这里只保留地址等关键信息。

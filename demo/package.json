@@ -1,0 +1,14 @@
+{
+  "name": "digital-human-demo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "双自我对话 · 数字人交互 Demo（零依赖 Node 服务，云端可直接 npm start）",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node tests/run-tests.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

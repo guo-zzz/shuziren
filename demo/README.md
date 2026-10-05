@@ -321,7 +321,34 @@ schtasks /delete /tn DigitalHumanDemoServer /f                        # 取消�
 - 只有**电脑开着并且你已登录**时服务才在；关机、睡眠期间访问会失败。
 - 本机 IP 由路由器分配，可能变化；换网络或重启路由器后用 `ipconfig` 重新确认。
 - 校园网、公共 Wi-Fi 常有「客户端隔离」，队友可能连不上——最稳的是用手机热点，让大家都连这个热点。
-- 想让外网（不在同一网络的人）也能访问，得用内网穿透或云服务器；临时演示建议用 GitHub Codespaces（见根目录 README）。
+- 想让**不在同一网络**的队友也能访问，见下一节「让不在同一网络的人也能访问」。
+
+### 让不在同一网络的人也能访问（公网网址）
+
+两种做法，任选其一：
+
+**做法一：Cloudflare 快速隧道（最快、不用注册，但你的电脑要开着）**
+
+双击 `开启公网访问.bat`，等 5～20 秒，窗口里会出现一条 `https://xxxx-xxxx-xxxx.trycloudflare.com` 的网址，
+把它发给队友，任何网络下都能打开。**窗口不要关**，关掉即断开；每次重新开启网址都会变。
+
+```powershell
+# 等价的手动命令
+D:\iwen-codex\codex-2\tools\cloudflared.exe tunnel --url http://127.0.0.1:8090 --no-autoupdate
+```
+
+**做法二：部署到云平台（推荐长期使用，你自己的电脑可以不开）**
+
+服务已适配云平台——会自动读取平台注入的 `PORT` 环境变量并监听 `0.0.0.0`，仓库根目录也放了 `render.yaml`。
+
+1. 用 GitHub 账号登录 https://render.com （免费注册）。
+2. `New` → `Web Service` → 选择仓库 `guo-zzz/shuziren`。
+3. 填：Root Directory `demo`、Build Command `npm install`、Start Command `npm start`；实例类型选 `Free`。
+4. 等 1～2 分钟，得到形如 `https://xxxx.onrender.com` 的**固定网址**，发给队友即可。
+
+注意：免费实例闲置 15 分钟会休眠，队友第一次打开要等 30～60 秒唤醒；云端不保存问卷/日记/日志（容器重启会清空），属正常现象。
+
+> 公网网址**没有密码**，拿到链接的人都能打开。要长期公开，建议先加一层访问口令。
 
 ---
 

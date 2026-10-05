@@ -1,0 +1,13 @@
+# Render 一键部署配置（https://render.com）
+# 本地运行方式不受影响；云平台上服务会自动读取 PORT 并监听 0.0.0.0。
+services:
+  - type: web
+    name: digital-human-demo
+    runtime: node
+    plan: free
+    rootDir: demo
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: "20"

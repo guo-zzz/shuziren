@@ -20,6 +20,9 @@ demo/tests/corpus/*
 deliverables/*.zip
 share/
 
+# ===== 本地工具（cloudflared 等，体积大且可重新下载）=====
+/tools/
+
 # ===== 系统文件 =====
 .DS_Store
 Thumbs.db
