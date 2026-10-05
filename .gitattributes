@@ -1,0 +1,3 @@
+# 全仓库不做换行符转换，保持文件字节原样。
+# 原因：本工程混用 CRLF/LF（app.js 是 CRLF，其余多为 LF），且 启动Demo.bat 是 GBK+CRLF。
+* -text

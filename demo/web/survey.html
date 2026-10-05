@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>基线问卷 · 双自我对话 Demo</title>
+<link rel="stylesheet" href="intake.css">
+</head>
+<body class="intake">
+<div class="wrap">
+
+  <div class="top">
+    <div class="title">
+      <h1>基线问卷</h1>
+      <div class="sub">知识库 v2.1 模块五 P1｜11 题，大概 3 分钟。这里填的答案会进「未来的我」的人格卡。</div>
+    </div>
+    <a class="navlink" href="index.html">返回对话</a>
+    <a class="navlink" href="diary.html">去写日记</a>
+  </div>
+
+  <div class="steps">
+    <span class="step on">1　基线问卷</span>
+    <span class="step">2　写日记</span>
+    <span class="step">3　生成人格卡</span>
+  </div>
+
+  <div class="panel">
+    <h2>作答须知</h2>
+    <p class="hint">
+      数据默认只存在这台电脑的浏览器里（R5 隐私边界：本地优先、明示授权、不用于训练），
+      另外镜像一份到工程目录的 data/ 方便换浏览器接着用，比赛提交的镜像里不含这些数据。
+      请不要填写真实姓名、学号、身份证号、住址这类可以定位到你的信息。
+    </p>
+  </div>
+
+  <form id="surveyForm" class="panel">
+    <div id="questions"></div>
+    <div class="actions">
+      <button type="button" id="btnSave" class="primary">保存问卷</button>
+      <button type="button" id="btnSaveDiary">保存并去写日记</button>
+      <button type="button" id="btnClear" class="ghost">清空</button>
+      <span class="status" id="status">还没有保存</span>
+    </div>
+  </form>
+
+  <p class="footnote">
+    问卷只回答「你想成为什么」；日记回答「你正在经历什么」。两个分身一个站在日记里，一个站在问卷写下的方向上。
+  </p>
+</div>
+
+<script src="emotions16.js"></script>
+<script src="safety.js"></script>
+<script src="personas.js"></script>
+<script src="persona-card.js"></script>
+<script src="survey.js"></script>
+</body>
+</html>

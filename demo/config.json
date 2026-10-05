@@ -1,0 +1,21 @@
+{
+  "port": 8090,
+  "mode": "auto",
+  "speech": {
+    "sequential": true,
+    "gapMs": 700,
+    "mouthSensitivity": 1.0,
+    "typingCharsPerSecond": 30
+  },
+  "backend": {
+    "protocol": "openai",
+    "baseUrl": "http://127.0.0.1:8000",
+    "chatPath": "/v1/chat/completions",
+    "healthPath": "/v1/models",
+    "apiKey": "",
+    "model": "qwen2.5-7b-instruct",
+    "stream": true,
+    "timeoutMs": 60000,
+    "extraBody": {}
+  }
+}

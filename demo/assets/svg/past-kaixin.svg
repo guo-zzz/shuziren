@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 240 310" xmlns="http://www.w3.org/2000/svg" class="avatar-svg" role="img" aria-label="过去的我 的数字人形象" width="480" height="620">
+  <defs>
+    <linearGradient id="av1-cloth" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5A6B8C"/>
+      <stop offset="100%" stop-color="#46567A"/>
+    </linearGradient>
+    <clipPath id="av1-mouthclip">
+      <path id="av1-mouthclippath" d="M 104.73 175.55 Q 120 170.75 135.27 175.55 Q 120 182.02 104.73 175.55 Z"/>
+    </clipPath>
+  </defs>
+  <g id="av1-body">
+    <path d="M42 310 C42 256 82 234 120 234 C158 234 198 256 198 310 Z" fill="url(#av1-cloth)"/>
+    <path d="M120 234 C112 250 108 274 108 310 M120 234 C128 250 132 274 132 310" fill="none" stroke="#46567A" stroke-width="2.4" opacity="0.7"/>
+  </g>
+  <rect x="104" y="186" width="32" height="58" rx="14" fill="#E0AE8B"/>
+  <g id="av1-head" transform="translate(120,140.00) rotate(0) translate(-120,-140)">
+    <ellipse cx="58" cy="146" rx="11" ry="17" fill="#E0AE8B"/>
+    <ellipse cx="182" cy="146" rx="11" ry="17" fill="#E0AE8B"/>
+    <ellipse cx="120" cy="140" rx="63" ry="75" fill="#F0C6A4"/>
+    <path d="M56 140 C52 76 88 50 120 50 C152 50 188 76 184 140 C177 112 165 95 147 87 C135 100 104 106 87 97 C71 89 60 108 56 140 Z" fill="#3A2E28"/>
+    <path d="M74 84 C88 66 108 58 126 58 C112 66 98 76 88 90 Z" fill="#4A3B33" opacity="0.75"/>
+    <path id="av1-browL" d="M86 110 Q99 103 112 106" fill="none" stroke="#3A2E28" stroke-width="5" stroke-linecap="round" transform="translate(0,-3) rotate(3 86 110)"/>
+    <path id="av1-browR" d="M128 106 Q141 103 154 110" fill="none" stroke="#3A2E28" stroke-width="5" stroke-linecap="round" transform="translate(0,-3) rotate(-3 154 110)"/>
+    <g id="av1-eyeL" transform="translate(98,134) scale(1,1.000) translate(-98,-134)">
+      <ellipse cx="98" cy="134" rx="13" ry="14" fill="#FFFFFF"/>
+      <circle cx="98" cy="135" r="7.4" fill="#3A3A3A"/>
+      <circle cx="95.4" cy="131.5" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+      <path d="M84 128 Q98 118 112 128" fill="none" stroke="#3A2E28" stroke-width="2.6" stroke-linecap="round" opacity="0.85"/>
+    </g>
+    <g id="av1-eyeR" transform="translate(142,134) scale(1,1.000) translate(-142,-134)">
+      <ellipse cx="142" cy="134" rx="13" ry="14" fill="#FFFFFF"/>
+      <circle cx="142" cy="135" r="7.4" fill="#3A3A3A"/>
+      <circle cx="139.4" cy="131.5" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+      <path d="M128 128 Q142 118 156 128" fill="none" stroke="#3A2E28" stroke-width="2.6" stroke-linecap="round" opacity="0.85"/>
+    </g>
+    <path d="M118 154 Q120 159 125 156" fill="none" stroke="#E0AE8B" stroke-width="2.6" stroke-linecap="round"/>
+    <path id="av1-mouth" d="M 104.73 175.55 Q 120 170.75 135.27 175.55 Q 120 182.02 104.73 175.55 Z" fill="#8E4B48"/>
+    <ellipse cx="120" cy="186.48" rx="9" ry="6" fill="#D9736E" clip-path="url(#av1-mouthclip)" opacity="0"/>
+    <ellipse cx="82" cy="164" rx="14" ry="8.5" fill="#E8896F" opacity="0.55"/>
+    <ellipse cx="158" cy="164" rx="14" ry="8.5" fill="#E8896F" opacity="0.55"/>
+  </g>
+</svg>

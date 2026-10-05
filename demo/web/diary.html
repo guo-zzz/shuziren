@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日记 · 双自我对话 Demo</title>
+<link rel="stylesheet" href="intake.css">
+</head>
+<body class="intake">
+<div class="wrap">
+
+  <div class="top">
+    <div class="title">
+      <h1>日记</h1>
+      <div class="sub">知识库 v2.1 模块五 P1–P3｜日记既是数据来源，本身也是干预手段：写下来的这一刻已经开始梳理。</div>
+    </div>
+    <a class="navlink" href="index.html">返回对话</a>
+    <a class="navlink" href="survey.html">去填问卷</a>
+  </div>
+
+  <div class="steps">
+    <span class="step" id="step1">1　基线问卷</span>
+    <span class="step on">2　写日记</span>
+    <span class="step on">3　生成人格卡</span>
+  </div>
+
+  <div class="grid2">
+
+    <div>
+      <div class="panel">
+        <h2>写一篇日记</h2>
+        <p class="hint">
+          写今天发生了什么、当时的感受，还有你有没有想做点什么。入库前会先跑一次 R9 安全扫描：
+          命中危机信号的条目不会进入分身素材库，只会安全留档并当场给你求助资源。
+        </p>
+
+        <div class="q">
+          <div class="qtitle">日期</div>
+          <div class="qbody"><input type="date" id="date"></div>
+        </div>
+        <div class="q">
+          <div class="qtitle">正文</div>
+          <div class="qbody">
+            <textarea id="entry" rows="9" placeholder="今天晚上投了第三十份简历，还是没回音。其实我知道不是我不行，但打开招聘网站就开始手抖。想明天先只改一份简历，改完就关掉网页。"></textarea>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="btnAdd" class="primary">写下来（先过 R9 扫描）</button>
+          <button id="btnSample" class="ghost">插一小段示例</button>
+          <span class="status" id="entryStatus"></span>
+        </div>
+
+        <div id="scanResult"></div>
+      </div>
+
+      <p class="footnote">
+        数据默认只存在这台电脑的浏览器里，另镜像一份到 demo/data/。请不要写真实姓名、学号、住址。
+        数据库里存的是提炼后的线索（事件、情绪、愿望），高痛苦条目按 R10 只提炼心态、不存原话。
+      </p>
+    </div>
+
+    <div>
+      <div class="panel">
+        <h2>人格卡</h2>
+        <p class="hint" id="cardStatus">还没有材料。</p>
+        <div id="cardNotice"></div>
+        <div class="actions">
+          <button id="btnBuild" class="primary">生成 / 更新人格卡</button>
+          <button id="btnRefine" title="需要后端大模型在线">用后端模型重新提炼</button>
+        </div>
+        <div class="tabs" id="cardTabs">
+          <span class="tab on" data-role="past">过去的我 看到的</span>
+          <span class="tab" data-role="future">未来的我 看到的</span>
+        </div>
+        <pre class="card" id="cardView">（还没有材料）</pre>
+      </div>
+
+      <div class="panel">
+        <h2>日记列表</h2>
+        <p class="hint">按日期排序。情绪标签由前端规则兜底判定（后端模型接通后改由模型返回）。标记为「高痛苦」的条目参与心态提炼，但不进可引用细节；「未入库」的条目按 R9 不参与提炼。</p>
+        <div id="entries"><div class="empty">还没有日记。</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="emotions16.js"></script>
+<script src="safety.js"></script>
+<script src="personas.js"></script>
+<script src="persona-card.js"></script>
+<script src="diary.js"></script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>双自我对话 · 数字人 Demo</title>
+<link rel="stylesheet" href="styles.css">
+<script>
+  // 概念切换：默认「过去的我 × 未来的我」；加 ?concept=present_ideal 可切回旧概念对照演示。
+  (function () {
+    var q = new URLSearchParams(location.search).get("concept");
+    if (q) window.DEMO_CONCEPT = q;
+  })();
+</script>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <h1>双自我对话 · 数字人 Demo</h1>
+    <div class="sub" id="conceptSub">过去的我 与 未来的我 同时在场，陪你聊完一件今天的事</div>
+  </div>
+  <span id="modeBadge" class="badge badge-mock">演示模式</span>
+  <span id="backendBadge" class="badge badge-off">后端未连接</span>
+  <span id="cardBadge" class="badge">人格卡：暂无材料</span>
+  <div class="toolbar">
+    <button id="btnAuto" class="primary">自动演示</button>
+    <button id="btnClear">清空</button>
+    <button id="btnExport">导出对话</button>
+    <button id="btnSettings">设置</button>
+    <a href="survey.html" title="基线问卷：填你想成为什么">问卷</a>
+    <a href="diary.html" title="写日记：记录正在经历什么">日记</a>
+  </div>
+</header>
+
+<main id="stage" class="stage"></main>
+
+<footer>
+  <div class="chips">
+    <button class="prompt-chip" data-text="我最近特别焦虑，秋招投了三十多份简历，一个面试都没收到。">秋招没有回音</button>
+    <button class="prompt-chip" data-text="这学期挂了一门课，一想到要补考就喘不上气。">挂科了不敢说</button>
+    <button class="prompt-chip" data-text="和室友闹了矛盾，现在回宿舍都觉得难受。">和室友闹矛盾</button>
+    <button class="prompt-chip" data-text="说不上来为什么，就是每天都觉得很累，晚上还睡不着。">睡不着的累</button>
+  </div>
+  <div class="composer">
+    <div class="targets" id="targets">
+      <label><input type="radio" name="target" value="both" checked><span>同时问两个我</span></label>
+      <label><input type="radio" name="target" value="left"><span>只问左边的我</span></label>
+      <label><input type="radio" name="target" value="right"><span>只问右边的我</span></label>
+    </div>
+    <textarea id="input" placeholder="说说今天发生了什么……（Enter 发送，Shift + Enter 换行）"></textarea>
+    <button id="send" class="primary">发送</button>
+  </div>
+</footer>
+
+<aside id="settings" class="settings">
+  <h2>设置</h2>
+
+  <div class="field">
+    <label for="modeSelect">运行模式</label>
+    <select id="modeSelect">
+      <option value="auto">自动（后端可用时用真实模型）</option>
+      <option value="mock">演示模式（使用预置文案）</option>
+      <option value="live">真实后端（强制调用大模型）</option>
+    </select>
+    <div class="hint">演示现场如果后端掉线，切到「演示模式」即可继续完整演示。</div>
+  </div>
+
+  <div class="field">
+    <label>后端服务</label>
+    <input type="text" id="backendAddr" readonly value="未连接">
+    <button id="btnRecheck">重新检测后端</button>
+    <div class="hint">后端地址在 demo/config.json 里修改，改完重启 node server.mjs 生效。</div>
+  </div>
+
+  <div class="field">
+    <label for="cardRoleSelect">人格卡（问卷 + 日记 → systemPrompt）</label>
+    <select id="cardRoleSelect">
+      <option value="past">查看「过去的我」拿到的材料</option>
+      <option value="future">查看「未来的我」拿到的材料</option>
+    </select>
+    <textarea id="cardView" readonly rows="8"></textarea>
+    <div class="hint" id="cardHint">人格卡替换 systemPrompt 里的 {{PERSONA_CARD}}。没有材料时，两个分身只会说明手上还没有你的材料，不会编造记忆。</div>
+  </div>
+
+  <div class="field">
+    <label>情绪与安全口径</label>
+    <input type="text" id="protocolInfo" readonly value="加载中…">
+    <div class="hint">情绪标签统一用官方 16 类英文枚举，展示时映射到 6 种表情；危机信号在调用模型前拦截。</div>
+  </div>
+
+  <div class="field">
+    <label for="mouthRange">口型幅度</label>
+    <input type="range" id="mouthRange" min="0.4" max="2" step="0.05" value="1">
+    <div class="hint">当前：<span id="mouthValue">1.00</span>。数字人说话时嘴巴张合的大小。</div>
+  </div>
+
+  <div class="row-inline">
+    <input type="checkbox" id="seqToggle" checked>
+    <label for="seqToggle">两个分身顺序发言，避免同时开口</label>
+  </div>
+
+  <button id="btnCloseSettings">关闭设置</button>
+</aside>
+
+<div id="toast"></div>
+
+<script src="emotions16.js"></script>
+<script src="safety.js"></script>
+<script src="personas.js"></script>
+<script src="persona-card.js"></script>
+<script src="mock-data.js"></script>
+<script src="avatar.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

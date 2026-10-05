@@ -1,0 +1,117 @@
+{
+  "generatedAt": "2026-10-05T02:51:26.666Z",
+  "items": [
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "开心",
+      "mode": "idle",
+      "file": "past-kaixin.svg",
+      "bytes": 3131
+    },
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "平静",
+      "mode": "idle",
+      "file": "past-pingjing.svg",
+      "bytes": 3125
+    },
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "低落",
+      "mode": "idle",
+      "file": "past-diluo.svg",
+      "bytes": 3127
+    },
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "焦虑",
+      "mode": "idle",
+      "file": "past-jiaolv.svg",
+      "bytes": 3127
+    },
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "愤怒",
+      "mode": "idle",
+      "file": "past-fennu.svg",
+      "bytes": 3128
+    },
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "惊喜",
+      "mode": "idle",
+      "file": "past-jingxi.svg",
+      "bytes": 3140
+    },
+    {
+      "persona": "past",
+      "name": "过去的我",
+      "emotion": "开心",
+      "mode": "speaking",
+      "file": "past-speaking.svg",
+      "bytes": 3160
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "开心",
+      "mode": "idle",
+      "file": "future-kaixin.svg",
+      "bytes": 3143
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "平静",
+      "mode": "idle",
+      "file": "future-pingjing.svg",
+      "bytes": 3125
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "低落",
+      "mode": "idle",
+      "file": "future-diluo.svg",
+      "bytes": 3139
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "焦虑",
+      "mode": "idle",
+      "file": "future-jiaolv.svg",
+      "bytes": 3151
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "愤怒",
+      "mode": "idle",
+      "file": "future-fennu.svg",
+      "bytes": 3140
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "惊喜",
+      "mode": "idle",
+      "file": "future-jingxi.svg",
+      "bytes": 3152
+    },
+    {
+      "persona": "future",
+      "name": "未来的我",
+      "emotion": "开心",
+      "mode": "speaking",
+      "file": "future-speaking.svg",
+      "bytes": 3170
+    }
+  ]
+}

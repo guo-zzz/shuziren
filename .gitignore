@@ -1,0 +1,24 @@
+# ===== 与数字人项目无关的本地文件（不共享）=====
+tmp/
+preview/
+timetable.html
+shot-2-today.png
+
+# ===== 运行时产物 =====
+demo/logs/
+demo/data/
+demo/tests/reports/
+__pycache__/
+*.pyc
+
+# ===== 机密：官方抽样语料，禁止入库、禁止外传 =====
+demo/tests/corpus/
+
+# ===== 可重新生成的打包产物 =====
+deliverables/*.zip
+share/
+
+# ===== 系统文件 =====
+.DS_Store
+Thumbs.db
+desktop.ini
