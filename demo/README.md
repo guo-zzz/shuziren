@@ -148,6 +148,46 @@ joy gratitude pride care relaxed surprise neutral mixed
 - 情绪标签：优先在流式块里带 `emotion` 字段（值取官方 16 类），或在回复首行写 `【sadness】`，
   两种都兼容；都不给时前端用规则兜底，不会报错。
 
+### 推荐：用环境变量接入，避免把密钥写进仓库
+
+服务端启动时会读取以下环境变量，并覆盖 `config.json` 对应字段：
+
+```powershell
+$env:DEMO_MODE = "auto"
+$env:DEMO_BACKEND_BASE_URL = "http://127.0.0.1:8000"
+$env:DEMO_BACKEND_CHAT_PATH = "/v1/chat/completions"
+$env:DEMO_BACKEND_HEALTH_PATH = "/v1/models"
+$env:DEMO_BACKEND_MODEL = "qwen2.5-7b-instruct"
+$env:DEMO_BACKEND_API_KEY = ""
+$env:DEMO_BACKEND_STREAM = "true"
+node server.mjs
+```
+
+如果使用云端 OpenAI 兼容服务，只需把 `DEMO_BACKEND_BASE_URL`、`DEMO_BACKEND_MODEL` 和
+`DEMO_BACKEND_API_KEY` 换成对应值。API Key 只在 Node 服务端使用，不会通过 `/api/config` 下发到浏览器。
+后端需要提供 `GET /v1/models` 健康接口和 `POST /v1/chat/completions` 对话接口；如果服务只支持非流式响应，
+把 `DEMO_BACKEND_STREAM` 设为 `false` 即可。
+
+启动后先检查：
+
+```powershell
+Invoke-WebRequest http://127.0.0.1:8090/api/health
+```
+
+返回 `"backend":"online"` 后，页面设置中的模式选择“真实后端”即可；`auto` 模式会在后端不可用时自动回退到演示文案。
+
+### 本地免费模型一键启动
+
+如果使用本机 Ollama，不需要手动设置环境变量。安装 Ollama 后，双击
+`启动真实后端Demo.bat` 即可：脚本会启动 Ollama、检查并拉取指定模型、把 Demo 接到
+`http://127.0.0.1:11434`，再启动 Node 服务。默认模型是 `qwen2.5:7b`；电脑内存较小时可在 PowerShell 中运行：
+
+```powershell
+.\启动真实后端Demo.ps1 -Model qwen2.5:3b
+```
+
+脚本默认使用局域网模式（`-Lan`），所以同一网络中的其他电脑可通过主机 IP 访问。首次拉取模型需要网络和数 GB 磁盘空间；模型下载完成后，后续启动不再重复下载。
+
 ---
 
 ## 六、结构化日志（初赛逐字段命中口径的练兵）

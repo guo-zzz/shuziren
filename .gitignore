@@ -8,6 +8,7 @@ shot-2-today.png
 demo/logs/
 demo/data/
 demo/tests/reports/
+models/
 __pycache__/
 *.pyc
 
