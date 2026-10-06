@@ -75,9 +75,9 @@ function knowledgeBlock(messages) {
 }
 
 /** 把知识块拼到 system 消息后面；前端不变，注入发生在服务端 */
-function augmentMessages(payload) {
+function augmentMessages(payload, cfg) {
   const msgs = Array.isArray(payload.messages) ? payload.messages.slice() : [];
-  if (!KIT || (payload.knowledge === false)) return msgs;
+  if (!KIT || (cfg.knowledge && cfg.knowledge.enabled === false) || (payload.knowledge === false)) return msgs;
   const block = knowledgeBlock(msgs);
   if (!block) return msgs;
   const idx = msgs.findIndex((m) => m && m.role === "system");
@@ -130,7 +130,35 @@ const MIME = {
 
 function loadConfig() {
   const raw = fs.readFileSync(CONFIG_PATH, "utf8").replace(/^\uFEFF/, "");
-  return JSON.parse(raw);
+  const cfg = JSON.parse(raw);
+  const env = process.env;
+  const text = (key, fallback) => env[key] === undefined || env[key] === "" ? fallback : env[key];
+  const number = (key, fallback) => {
+    const value = Number(text(key, fallback));
+    return Number.isFinite(value) ? value : fallback;
+  };
+  const bool = (key, fallback) => {
+    const value = text(key, fallback);
+    if (typeof value === "boolean") return value;
+    return ["1", "true", "yes", "on"].includes(String(value).toLowerCase());
+  };
+
+  // Environment variables keep credentials and machine-specific endpoints out of git.
+  cfg.port = number("DEMO_PORT", cfg.port || 8090);
+  cfg.mode = text("DEMO_MODE", cfg.mode || "auto");
+  cfg.knowledge = Object.assign({}, cfg.knowledge || {}, {
+    enabled: bool("DEMO_KNOWLEDGE_ENABLED", cfg.knowledge?.enabled !== false),
+  });
+  cfg.backend = Object.assign({}, cfg.backend || {}, {
+    baseUrl: text("DEMO_BACKEND_BASE_URL", cfg.backend?.baseUrl || ""),
+    chatPath: text("DEMO_BACKEND_CHAT_PATH", cfg.backend?.chatPath || "/v1/chat/completions"),
+    healthPath: text("DEMO_BACKEND_HEALTH_PATH", cfg.backend?.healthPath || "/v1/models"),
+    apiKey: text("DEMO_BACKEND_API_KEY", cfg.backend?.apiKey || ""),
+    model: text("DEMO_BACKEND_MODEL", cfg.backend?.model || ""),
+    timeoutMs: number("DEMO_BACKEND_TIMEOUT_MS", cfg.backend?.timeoutMs || 60000),
+    stream: bool("DEMO_BACKEND_STREAM", cfg.backend?.stream !== false),
+  });
+  return cfg;
 }
 
 function sendJson(res, code, payload) {
@@ -273,7 +301,7 @@ async function handleChat(req, res, cfg) {
   const { baseUrl, chatPath, apiKey, model, timeoutMs, extraBody } = cfg.backend;
   const url = baseUrl.replace(/\/$/, "") + (chatPath || "/v1/chat/completions");
   // 知识库检索增强：拼进 system 消息后再转发（前端无需改动）
-  const augmented = augmentMessages(payload);
+  const augmented = augmentMessages(payload, cfg);
   const body = Object.assign({}, extraBody || {}, payload, {
     messages: augmented.length ? augmented : payload.messages,
     model: payload.model || model,
